@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <p id="progress"></p>
+    <input type="file" id="fileupload" name="test">
+    <span id="up">点击上传</span>
+  </body>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.fileupload.js"></script>
+
+<script type="text/javascript">
+$('#fileupload').fileupload({
+    url :'/fileup',
+    dataType: 'json',
+    formData:{},
+    done: function (e, data) {
+    	alert("ok");        
+    },
+    change : function(e, data){
+        console.dir(data);
+    },
+    add: function (e, data) {           
+        $("#up").click(function(){  
+        console.log(1);      	
+        	data.submit();
+        });
+    },
+    fail : function(e, data){
+        alert("upload error");
+    },
+    progressall: function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $("#progress").text(progress);
+    },
+    // dropZone: $('#dropzone')
+});
+</script>
+
+</html>
